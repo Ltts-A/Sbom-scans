@@ -1,0 +1,27 @@
+//****************************************************************************************************************************************************
+// COPYRIGHT NOTICE
+//
+// Copyright (c) 2018 by Parker-Hannifin Corporation.
+// All rights reserved.
+//
+// No part of this work may be reproduced, published, or distributed in any form or by any means (electronically, mechanically, photocopying,
+// recording or otherwise), or stored in a database or retrieval system, without the prior written permission of Parker-Hannifin Corporation in each
+// instance.
+//
+// Repository:
+//   - SVN: 1065602\trunk\publish
+//
+// Description:
+//   This file is used for generating Jenkins friendly output. In order to use this file, simply make sure it gets passed to lint-nt (e.g. by passing
+//   this file to "lint.bat <typical lint options> <filename>").
+//
+// History:
+//   2018-Feb-23 by Tamkin Rahman - Case 46457, Review 7435
+//   - Created from the file of the same name in MKS: 1051639.
+//****************************************************************************************************************************************************
+
+// Force formatting to match required formatting for Jenkins PC-Lint Plugin (reference https://wiki.jenkins.io/display/JENKINS/PcLint+options)
++ffn // force full path names
+-width(0) // don't insert line breaks (unlimited output width).
+-hf1 // message height one
+-"format=%f(%l): %t %n: %m (%t <a href=\qhttp://gimpel-online.com/MsgRef.html#%n\q>%n</a>)"

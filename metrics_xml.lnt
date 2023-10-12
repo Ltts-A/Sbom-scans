@@ -1,0 +1,40 @@
+//****************************************************************************************************************************************************
+// COPYRIGHT NOTICE
+//
+// Copyright (c) 2019 by Parker-Hannifin Corporation.
+// All rights reserved.
+//
+// No part of this work may be reproduced, published, or distributed in any form or by any means (electronically, mechanically, photocopying,
+// recording or otherwise), or stored in a database or retrieval system, without the prior written permission of Parker-Hannifin Corporation in each
+// instance.
+//
+// Repository:
+//   - SVN: 983641
+//
+// Description:
+//   This file is used for generating xml friendly output for the Software Metrics HPT group. In order to use this file, simply make sure it gets 
+//   passed to lint-nt (e.g. by passing this file to "lint.bat <typical lint options> <filename>").
+//
+//   Note: in order to generate a properly formatted XML file, lint.bat must be called with "quiet" defined by setting quiet = "something" in the
+//         environment.
+//
+// History:
+//   2019-Jan-08 by Michael Fetherston - Case 53150, Review 9007
+//   - Created.
+//****************************************************************************************************************************************************
+
+//****************************************************************************************************************************************************
+// XML options.
+//****************************************************************************************************************************************************
+++ffn
+-v          // turn off verbosity
+-width(0)   // don't insert line breaks (unlimited output width).
++xml(?xml version="1.0" ?)   // add version information
++xml(doc)   // turn on xml escapes; the whole is bracketed with the
+            // pair <doc> ... </doc>
+-"format=<message><file>%f</file> <line>%l</line> <type>%t</type> <code>%n</code> <desc>%m</desc></message>"
+-"format_specific= "
+-hFs1   // The height of a message should be 1 (i.e. don't output the
+        // line in error); always produce File information; and Space
+        // between messages
+-pragma(message)    // do not issue pragma messages

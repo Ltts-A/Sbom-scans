@@ -1,0 +1,35 @@
+//****************************************************************************************************************************************************
+// COPYRIGHT NOTICE
+//
+// Copyright (c) 2023 by Parker-Hannifin Corporation.
+// All rights reserved.
+//
+// No part of this work may be reproduced, published, or distributed in any form or by any means (electronically, mechanically, photocopying,
+// recording or otherwise), or stored in a database or retrieval system, without the prior written permission of Parker-Hannifin Corporation in each
+// instance.
+//
+// Repository:
+//   - SVN: 1090601
+//
+// Description:
+//   This file is used for providing defines specific to the GVx075B build.
+//
+// History:
+//   2023-Jun-26 by Michael Fetherston - Issue GVI-1175, Review 14873
+//  - Created from 10906A7.
+//****************************************************************************************************************************************************
+
+// These are all defined in the project properties in Tasking.
+-d_t_didi_nxp=1
+-d_t_indy_890=0
+-d_t_indy_skai=0
+-d_t_indy_HV_Parker=0
+-d_t_indy_ePump=0
+-d_t_indy_C3PO=0
+-d_t_indy_GVx250B=0
+-d_t_indy_GVx075B=1
+-d_t_indy_GVI250=0
+-d_t_indy_GVI075=0
+
+// Include the correct pinMapper files.
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\PinMapper\GVx250B"

@@ -1,0 +1,370 @@
+//****************************************************************************************************************************************************
+// COPYRIGHT NOTICE
+//
+// Copyright (c) 2021-2023 by Parker-Hannifin Corporation.
+// All rights reserved.
+//
+// No part of this work may be reproduced, published, or distributed in any form or by any means (electronically, mechanically, photocopying,
+// recording or otherwise), or stored in a database or retrieval system, without the prior written permission of Parker-Hannifin Corporation in each
+// instance.
+//
+// Repository:
+//   - svn: 1090601
+//
+// Description:
+//   This is the project specific PC Lint configuration file, where all the project specific configuration for PC Lint should be entered.
+//
+//   This file is intended to be modified by the end user for the project being used.
+//
+// History:
+//   2021-Feb-17 by Jonathon Church - Case 67943, Review 11492
+//   - Created from project_specific_CM5042.lnt in 10716T1 in a past iteration, and tweaked for 1090601.
+//   - Added the UDS directory.
+//   2021-Apr-06 by Jonathon Church - Case 68941, Review 11576
+//   - Updated to support Linting all Parker code.
+//   2021-May-26 by Michael Fetherston - Case 70007, Review 11690
+//   - Updated paths to SafeRTOS.
+//   2021-May-31 by Michael Fetherston - Case 69999, Review 11694
+//   - Added +fdi option to use include paths the same way the compiler does.
+//   2021-Jun-04 by Michael Fetherston - Case 70018, Review 11707
+//   - Added in support for the 10906A4_iLLD_TC27D library.
+//   2021-Jun-16 by Michael Fetherston - Case 70365, Review 11738
+//   - Added CANOpen and SysParamDB libraries.
+//   2021-Jun-25 by Michael Fetherston - Case 70628, Review 11750
+//   - Added Platform library.
+//   2021-Oct-14 by Prasad Joshi - Case 73523, Review 12024
+//   - Updated -d__private0= flag in Project defines for Lint
+//   2021-Nov-17 by Michael Fetherston - Case 74116, Review 12127
+//   - Moved trips files to 10906A7 faults folder.
+//   2022-Jan-21 by Sandesh Vadye - Case 75777, Review 12320
+//   - Updated -d__enable_=0 flag in Project defines for Lint.
+//   - Added path for headers present in shared_utils folder.
+//   2022-Mar-25 by Nitesh Takle - Case 76894, Review 13470
+//   - Updated with supress warning 526, for functions and objects to suppress lint warnings.
+//   2023-Feb-28 by Riyaz Kesarani - Case 83668, Review 14444
+//   - Added summary() switch to produce summary of lint report.
+//   - Added path for standard types files used in the project.
+//   2023-May-11 by Nitesh Takle - Case 86187, Review 14732
+//   - Updated -d__share= flag in Project defines for Lint.
+//   2023-May-15 by Nicolaj Jensen on behalf of Gerard Oustry - Case 85923, Review 14746
+//   - Added ..\root\Indy\libraries\10906A7_PlatformLibrary\source\fe_comms to include dirs so lint can run right.
+//   2023-Jun-21 by Nicolaj Jensen on behalf of Gerard Oustry - Issue GVI-1177, Review 14870
+//   - Started the process of global suppression of iLLD macros for Note 9078.
+//   - Global suppression of 9078 for a few register defines.
+//   2023-Jun-23 by Nicolaj Jensen - Issue GVI-152, Review 14878
+//   - Global suppression of 9078 and 9087 for iLLD register defines.
+//   2023-Jul-06 by Michael Fetherston - Issue GVI-1175, Review 14873
+//   - Added support for SafeTLib (10906AD).
+//   - Removed PinMapper include. PinMapper include now provided in each of $product$.lnt.
+//    - Eg GVI250.lnt
+//   2023-Jul-11 by Nicolaj Jensen - Issue GVI-154, Review 14889
+//   - Global suppression of more 9078 for iLLD register defines.
+//   2023-Aug-01 by Nicolaj Jensen - Issue GVI-1386, Review 14944
+//   - Changes to de-linting resolver_fbk_sys.c and generic_encoder.c.
+//   2023-Aug-04 by Nicolaj Jensen - Issue GVI-1561, Review 14986
+//   - De-linting trc_sys.c.
+//   2023-Aug-31 by Nicolaj Jensen on behalf of Gerard Oustry - Issue GVI-1376, Review 15063
+//   - Changed to support new STO PBIT sequence.
+//   2023-Sep-05 by Nicolaj Jensen - Issue GVI-1764, Review 15078
+//   - Changes to de-lint resolver_fbk_control_loop.c.
+//****************************************************************************************************************************************************
+
+//****************************************************************************************************************************************************
+// Lint options.
+// The +fdi option tells lint to use include paths the same way the compiler does: start with the directory of the including file rather
+// than the current directory.
+//****************************************************************************************************************************************************
++fdi
+
+//****************************************************************************************************************************************************
+//  Project Includes
+//    Use -i<Path> to include a path. It is recommended that <path> be relative to the Lint directory so the project is more portable. It is also
+//    recommended that <Path> be surrounded with "". For example, to include ..\Parker use:
+//       -i"..\Parker"
+//    If the include path is for a library header, such as one that is outside your control, you can tell PC Lint that it is a library header by using
+//    '+libdir(<Path>)' statement, where <Path> is the path you want to add. This is useful to eliminate libary type warnings that are not under our
+//    control.
+//****************************************************************************************************************************************************
+
+// For SafeRTOS
++libdir(..\root\Indy\libraries\10906A2_SafeRTOS\config)
+-i"..\root\Indy\libraries\10906A2_SafeRTOS\config"
++libdir(..\root\Indy\libraries\10906A2_SafeRTOS\config\tc2xx)
+-i"..\root\Indy\libraries\10906A2_SafeRTOS\config\tc2xx"
++libdir(..\root\Indy\libraries\10906A2_SafeRTOS\include)
+-i"..\root\Indy\libraries\10906A2_SafeRTOS\include"
+
+// For lint.
+-i"."
+
+// For version.h
++libdir(..\root\Indy)
+-i"..\root\Indy"
+
+// For iLLD
++libdir(..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\Configuration)
+-i"..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\Configuration"
++libdir(..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D)
+-i"..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D"
++libdir(..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Asclin\Asc)
+-i"..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Asclin\Asc"
++libdir(..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Cpu\Std)
+-i"..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Cpu\Std"
++libdir(..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Cpu\Irq)
+-i"..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Cpu\Irq"
++libdir(..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Flash\Std)
+-i"..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Flash\Std"
++libdir(..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Multican\Cam)
+-i"..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Multican\Can"
++libdir(..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Multican\Std)
+-i"..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Multican\Std"
++libdir(..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Qspi\SpiMaster)
+-i"..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Qspi\SpiMaster"
++libdir(..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Scu\Std)
+-i"..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Scu\Std"
++libdir(..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Stm\Std)
+-i"..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\Stm\Std"
++libdir(..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\_Reg)
+-i"..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\TC27D\_Reg"
++libdir(..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\SrvSw)
+-i"..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\SrvSw"
++libdir(..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\SrvSw\SysSe\Math)
+-i"..\root\Indy\libraries\10906A4_iLLD_TC27D\ifx\SrvSw\SysSe\Math"
+
+// For CANopen
++libdir(..\root\Indy\libraries\10906A5_CANOpen\include)
+-i"..\root\Indy\libraries\10906A5_CANOpen\include"
++libdir(..\root\Indy\libraries\10906A5_CANOpen\include\canopen)
+-i"..\root\Indy\libraries\10906A5_CANOpen\include\canopen"
++libdir(..\root\Indy\libraries\10906A5_CANOpen\include\drivers)
+-i"..\root\Indy\libraries\10906A5_CANOpen\include\drivers"
+
+// For SysParamDB
++libdir(..\root\Indy\libraries\10906A6_SysParamDB)
+-i"..\root\Indy\libraries\10906A6_SysParamDB"
++libdir(..\root\Indy\libraries\10906A6_SysParamDB\CANOpenFiles)
+-i"..\root\Indy\libraries\10906A6_SysParamDB\CANOpenFiles"
+
+// For Platform library.
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\externalSources\types)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\externalSources\types"
+
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source"
+
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\fe_app)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\fe_app"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\fe_base_io)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\fe_base_io"
+
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\fe_comms)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\fe_comms"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\fe_comms\j1939)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\fe_comms\j1939"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\fe_comms\j1939\config)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\fe_comms\j1939\config"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\fe_comms\Uds)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\fe_comms\Uds"
+
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\fe_manager)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\fe_manager"
+
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\services)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\services"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\services\common)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\services\common"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\services\faults)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\services\faults"
+
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_comms)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_comms"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_comms\eba)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_comms\eba"
+
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_hal)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_hal"
+
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_nonvol)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_nonvol"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_nonvol\nvol_auto)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_nonvol\nvol_auto"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_nonvol\nvol_serialise)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_nonvol\nvol_serialise"
+
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_param_db)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_param_db"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_param_db\application)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_param_db\application"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_param_db\base_comms)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_param_db\base_comms"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_param_db\basic_drive)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_param_db\basic_drive"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_param_db\device_manager)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_param_db\device_manager"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_param_db\fast_trace)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_param_db\fast_trace"
+
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_tlf35584)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_tlf35584"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_tlf35584\_Impl)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_tlf35584\_Impl"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_tlf35584\_Reg)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_tlf35584\_Reg"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_tlf35584\Driver)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_tlf35584\Driver"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_tlf35584\Hal)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_tlf35584\Hal"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_tlf35584\If)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_tlf35584\If"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_tlf35584\Std)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\sys_tlf35584\Std"
+
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\TC0)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\TC0"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\TC1)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\TC1"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\TC2)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\TC2"
+
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\externalSources)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\externalSources"
++libdir(..\root\Indy\libraries\10906A7_PlatformLibrary\source\externalSources\config)
+-i"..\root\Indy\libraries\10906A7_PlatformLibrary\source\externalSources\config"
+
++libdir(..\root\Indy\libraries\10906AD_SafeTlib_Library\includes)
+-i"..\root\Indy\libraries\10906AD_SafeTlib_Library\includes"
+
++libdir(..\root\Indy\libraries\10906AH_FuSa_safeAL_Library\include)
+-i"..\root\Indy\libraries\10906AH_FuSa_safeAL_Library\include"
+
+// For the application
+-i"..\root\Indy\source"
+-i"..\root\Indy\source\fe_basic_drive"
+-i"..\root\Indy\source\fe_basic_drive\control\global_time"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\cmm"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\curr"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\current_lim"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\fbk"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\fs"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\idiq"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\kwhr"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\mtl"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\pmac_closed_loop"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\pmac_flux"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\pmac_mot"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\pmac_svc"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\pos_alignment"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\pred_uduq"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\rts"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\spd"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\ssp"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\tlim"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_control\wav"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_protection"
+-i"..\root\Indy\source\fe_basic_drive\control\motor_protection\motor_load"
+-i"..\root\Indy\source\fe_basic_drive\control\mseq"
+-i"..\root\Indy\source\fe_basic_drive\control\spd_fbk\angle_sensor_fbk"
+-i"..\root\Indy\source\fe_basic_drive\control\spd_fbk\generic_fbk"
+-i"..\root\Indy\source\fe_basic_drive\control\spd_fbk\mag_sincos_fbk"
+-i"..\root\Indy\source\fe_basic_drive\control\spd_fbk\resolver_fbk"
+-i"..\root\Indy\source\fe_basic_drive\control\sstrp"
+-i"..\root\Indy\source\fe_basic_drive\control\sstrp\stall"
+-i"..\root\Indy\source\fe_basic_drive\control\sstrp\vdc_ripple"
+-i"..\root\Indy\source\fe_basic_drive\control\stack_management"
+-i"..\root\Indy\source\fe_basic_drive\control\stack_management\inv_time"
+-i"..\root\Indy\source\fe_basic_drive\control\stack_management\pcode"
+-i"..\root\Indy\source\fe_basic_drive\oscillo"
+-i"..\root\Indy\source\fe_basic_drive\reference"
+-i"..\root\Indy\source\fe_basic_drive\seq"
+-i"..\root\Indy\source\TC1"
+-i"..\root\Indy\source\fe_basic_drive_mbd\shared_utils"
+
+//****************************************************************************************************************************************************
+//  Project defines for Lint
+//****************************************************************************************************************************************************
+-d__far=
+-d__near=
+-d__private0=
+-d__private1=
+-d__private2=
+-d__enable_=
+-d__share=
+
+//****************************************************************************************************************************************************
+//  Compiler Configuration
+//****************************************************************************************************************************************************
+".\co-tricore.lnt"  // Do not modify this line.
+
+//****************************************************************************************************************************************************
+//  MISRA Configuration
+//    This section can be modified to rule out MISRA violations for 3rd party libraries (i.e. compiler, FreeRTOS, iLLD, etc). Consider whether any
+//    additions here should be added into 1065602 (Lint configuration files for Tasking TriCore).
+//****************************************************************************************************************************************************
+// The iLLD has several identifiers that start with Ifx that exceed the 31 character limit imposed by MISRA. -elib doesn't suppress them, but using
+// -esym does. We use a wildcard so we can use just one group.
+-esym(793, Ifx*)  // Removes the "ANSI/ISO limit of 31 'significant characters in an external identifier 'xxx', exceeded -- processing is unaffected"
+                  // warning.
+
+// Both iLLD and Tasking make use of some _* identifiers that create a lot of noise in the global wrap up. To tidy up the global wrap up we can ignore
+// the warnings so we can focus on our issues, provided the wildcards used don't impact our names.
+-esym(9058, _* ) // Removes the "tag 'xxx' (File reference ) unused outside of..." warning.
+
+//****************************************************************************************************************************************************
+//  Pre-include files
+//    Use -header(<file>) to pre-include a file for Lint purposes. This section should be after the project includes section so PC Lint knows how to
+//    find the file.
+//****************************************************************************************************************************************************
+-header( lint_defines.h )
++libh( lint_defines.h )
+
+//****************************************************************************************************************************************************
+//  Project specific Global Deviations
+//    Ideally we have this section empty, however at times a particular warning may be too much grief to deal with that it is just simpler to ignore
+//    the warning. Do this here with a comment as to why it is being disabled. Some examples are (refer to PC Lint documentation for syntax):
+//      -e14  // Disable incorrect previously defined error messages.
+//      +fvr: // Don't care whether functions return values are used.
+//      -efile( 451, stdio.h )  // IAR uses a non-standard include guard that Lint isn't happy with.
+//****************************************************************************************************************************************************
+-e537             // Removes warning of repeated include file, so long as the standard header template is used. See case 44377.
+
+// Disable "Note 9059: C comment contains C++ comment [MISRA 2012 Rule 3.1, required]" as the suppression in afw_j1939Ca.h doesn't appear to be working.
+-e9059
+
+-efile( 451, stddef.h )  // TASKING's include files violate MISRA with their include guards which results in an error.
+
+-esym(714, createRTOSTask, vApplicationIdleHook, vApplicationTickHook)  // Disable "Info 714: Symbol not referenced"
+
+// These functions are defined in other libraries so can't see their definition.
+// Suppress Warning 526: Symbol 'x' not defined for the functions.
+-esym(526, periodicCanOpenStackTask, Timer_int)
+
+// These objects are defined in other libraries so can't see their definition.
+// Suppress Warning 526: Symbol 'x' not defined for the objects.
+-esym(526, BufferFromCore0_To_Core1, BufferEncoderFromCore1_To_Core0, BufferEncoderFromCore0_To_Core1, BufferFromCore1_To_Core0,
+           BufferSpdFeedbackFromCore0_To_Core1, endofbasic_init, _lc_u_int_tab_tc1)
+
+// These objects are defined in iLLD and are intended to be used this way.
+// Suppress Note 9078: conversion between a pointer and integer type [MISRA 2012 Rule 11.4, advisory]
+-emacro(9078, DMA_ACCEN10, DMA_CH10_CHCSR, DMA_CH10_RDCRCR, DMA_CH10_SDCRCR, DMA_HRR10, MODULE_DMA)
+-emacro(9078, GPT120_PISEL, GPT120_T2, GPT120_T2CON, GPT120_T3CON ) 
+-emacro(9078, INT_SRB0)
+-emacro(9078, OUT_DCLINK_DISCHRG_OMR, OUT_RSLVR_RES0_OMR, OUT_RSLVR_RES1_OMR)
+-emacro(9078, P00_IN, P02_IN, P11_IN, P20_IN, P40_IN )
+-emacro(9078, P00_OMR, P02_OMR, P10_OMR, P11_OMR, P13_OMR, P14_OMR, P15_OMR, P23_OMR, P32_OMR )
+-emacro(9078, P22_OUT, P23_OUT )
+-emacro(9078, QSPI0_BACONENTRY, QSPI0_CLC, QSPI0_DATAENTRY0, QSPI0_ECON0, QSPI0_GLOBALCON, QSPI0_GLOBALCON1, QSPI0_RXEXIT, QSPI0_RXEXITD , QSPI0_SSOC, QSPI0_STATUS) 
+-emacro(9078, SRC_DMA_DMA0_CH10)
+-emacro(9078, VADC_G0_RES0, VADC_G0_RES3, VADC_G0_RES7, VADC_G1_RES0, VADC_G1_RES2, VADC_G2_RES0, VADC_G2_RES3, VADC_G3_RES1, VADC_G4_RES3, 
+              VADC_G5_RES5)
+
+-emacro(9087, GPT120_PISEL, GPT120_T2, GPT120_T2CON, GPT120_T3CON ) // Symbols provided by iLLD and we've closely reviewed the use and exception.
+-emacro(9087, OUT_DCLINK_DISCHRG_OMR, OUT_RSLVR_RES0_OMR, OUT_RSLVR_RES1_OMR) // Symbols provided by iLLD and we've closely reviewed the use and exception.
+-emacro(9087, P02_OMR, P13_OMR, P22_OUT ) // Symbols provided by iLLD and we've closely reviewed the use and exception.
+-emacro(9087, QSPI0_CLC, QSPI0_ECON0, QSPI0_GLOBALCON, QSPI0_GLOBALCON1, QSPI0_SSOC) // Symbols provided by iLLD and we've closely reviewed the use and exception.
+//****************************************************************************************************************************************************
+// Provides a summary of all produced messages
+//****************************************************************************************************************************************************
+-summary()

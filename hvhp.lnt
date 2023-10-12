@@ -1,0 +1,45 @@
+//****************************************************************************************************************************************************
+// COPYRIGHT NOTICE
+//
+// Copyright (c) 2021-2023 by Parker-Hannifin Corporation.
+// All rights reserved.
+//
+// No part of this work may be reproduced, published, or distributed in any form or by any means (electronically, mechanically, photocopying,
+// recording or otherwise), or stored in a database or retrieval system, without the prior written permission of Parker-Hannifin Corporation in each
+// instance.
+//
+// Repository:
+//   - SVN: 10906A7
+//
+// Description:
+//   This file is used for providing defines specific to the GVx250 HVHP build.
+//
+// History:
+//  2021-Jun-01 by Michael Fetherston - Case 70010, Review 11704 
+//  - Created from skai.lnt.
+//  2021-Nov-29 by Michael Fetherston - Case 74571, Review 12171
+//  - Set _t_indy_GVx250B to 0, since this is not the GVx250B build.
+//  2022-Jul-27 by Meng Zhong Kuan - Case 79742, Review 13838
+//  - Added _t_indy_GVx075B.
+//  2022-Aug-15 by Meng Zhong Kuan - Case 80500, Review 13922
+//  - Added _t_indy_GVI250.
+//  2022-Sep-01 by Meng Zhong Kuan - Case 80868, Review 13970
+//  - Added _t_indy_GVI075.
+//  2023-Jan-16 by Cole Bouchard - Case 83323, Review 14299
+//  - Added include of HV_PARKER PinMapper.
+//****************************************************************************************************************************************************
+
+// These are all defined in the project properties in Tasking.
+-d_t_didi_nxp=1
+-d_t_indy_890=0
+-d_t_indy_skai=0
+-d_t_indy_HV_Parker=1
+-d_t_indy_ePump=0
+-d_t_indy_C3PO=0
+-d_t_indy_GVx250B=0
+-d_t_indy_GVx075B=0
+-d_t_indy_GVI250=0
+-d_t_indy_GVI075=0
+
+// Include the correct pinMapper files.
+-i"..\10906A7_PlatformLibrary\HV_PARKER"

@@ -1,0 +1,33 @@
+//****************************************************************************************************************************************************
+// COPYRIGHT NOTICE
+//
+// Copyright (c) 2021-2023 by Parker-Hannifin Corporation.
+// All rights reserved.
+//
+// No part of this work may be reproduced, published, or distributed in any form or by any means (electronically, mechanically, photocopying,
+// recording or otherwise), or stored in a database or retrieval system, without the prior written permission of Parker-Hannifin Corporation in each
+// instance.
+//
+// Repository:
+//   - SVN: 1090601
+//
+// Description:
+//   This file is used for providing defines specific to the SKAI build.
+//
+// History:
+//  2021-Apr-06 by Jonathon Church - Case 68941, Review 11576
+//   - Created from Jenkins.lnt from 1071604.
+//  2023-Jan-16 by Cole Bouchard - Case 83323, Review 14299
+//  - Added include of SKAI PinMapper.
+//****************************************************************************************************************************************************
+
+// These are all defined in the project properties in Tasking.
+-d_t_didi_nxp=1
+-d_t_indy_890=0
+-d_t_indy_skai=1
+-d_t_indy_HV_Parker=0
+-d_t_indy_ePump=0
+-d_t_indy_C3PO=0
+
+// Include the correct pinMapper files.
+-i"..\10906A7_PlatformLibrary\PinMapper\SKAI" 

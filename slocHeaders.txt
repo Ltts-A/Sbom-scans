@@ -1,0 +1,37 @@
+######################################################################################################################################################
+# History:
+#  2021-Apr-06 by Jonathon Church - Case 68941, Review 11576
+#   - Created to generate a list of header files to include with sloc.
+#
+# There is one command per line. All directories specified are relative to this file. Commands are:
+#   i <path to file> allow you to include a file. This recursively searches all directories for the file using the specified path. The file name can
+#       include a wild card description, such as ..\source\*.c to include all .c files found under the ..\source directory.
+#
+#   <blank line> Blank lines are ignored.
+#
+#   f <path to file> removes a file from the list of files to be linted. This is a single file and the path to the file and the file name must be
+#       exact matches and wild cards are not supported.
+#
+#   d <path> removes all files from a specific path from the list of files to lint. This is not recursive. So if "..\source\driver" is specified, then
+#       none of the files in "..\source\driver" will be linted, but files in the subdirectories of "..\source" will be if they have been specified.
+#
+# Note that file removal occurs after this file has been processed, so sequencing of the commands in the file are not important.
+######################################################################################################################################################
+
+######################################################################################################################################################
+# Add headers to be included in the sloc calculation.
+######################################################################################################################################################
+
+i ..\root\Indy\source\*.h
+
+######################################################################################################################################################
+# Exclude specific files.
+######################################################################################################################################################
+
+# Exclude all the header files for CANopen
+d ..\root\Indy\source\fe_comms\CANOpen
+d ..\root\Indy\source\fe_comms\CANOpen\canopen\include
+d ..\root\Indy\source\fe_comms\CANOpen\canopen\source
+d ..\root\Indy\source\fe_comms\CANOpen\drivers\aurix_tc275
+d ..\root\Indy\source\fe_comms\CANOpen\drivers\aurix_tc275\Config
+d ..\root\Indy\source\fe_comms\CANOpen\drivers\shar_inc

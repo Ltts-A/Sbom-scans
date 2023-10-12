@@ -1,0 +1,14 @@
+fast_task,FAST_TASK_STACK_SIZE,MainTc1.c
+slow_task,SLOW_TASK_STACK_SIZE,MainTc1.c
+nvol_serialise_task,NVOL_TASK_STACK_SIZE,MainTc1.c
+bgnd_task,BGND_TASK_STACK_SIZE,MainTc1.c
+periodicCanStackTask,CANJ1939STACK_TASK_STACK_SIZE,MainTc1.c
+periodicCanOpenStackTask,CANOPENSTACK_TASK_STACK_SIZE,MainTc1.c
+halVerifyAppMonitor,HAL_VERIFY_APP_STACK_SIZE,hal_verifyApp.c
+slFlashEraseSessionTask,SL_FLASH_STACK_SIZE,sl_flash.c
+afwUdsTask,UDS_TASK_STACK_SIZE,afw_uds.c
+loggerTask,LOG_TASK_STACK_SIZE,afw_logger.c
+ioGateKeeperTask,IO_GATE_KEEPER_TASK_STACK_SIZE,io_gate_keeper.c
+safetlib_task,SAFETLIB_TASK_STACK_SIZE,MainTc1.c
+j1939Task,J1939_TASK_STACK_SIZE,MainTc1.c
+tagSerJ1939Task,AFW_TAGSER_J1939_TASK_STACK_SIZE,afw_tagSerializer_j1939.h

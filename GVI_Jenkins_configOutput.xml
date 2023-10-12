@@ -1,0 +1,595 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>The Indy Inverter App&lt;br&gt;&#xd;
+This Jenkins project builds the following software variants: 1104601 GVI125, 1091604 GVI250 and 1095602 GVI075.&lt;br&gt;&#xd;
+&lt;br&gt;&lt;b&gt;Notes:&lt;/b&gt;&lt;br&gt;&#xd;
+- Once 10906A0 starts building successfully, change this project to copy artifacts based on &quot;Upstream build that triggered this job&quot;.&lt;br&gt;&#xd;
+- Only the SLOC and compile graphs for this project are valid.&lt;br&gt;&#xd;
+&lt;br&gt;&#xd;
+&lt;b&gt;Job Config History:&lt;/b&gt;&lt;br&gt;&#xd;
+Sprint 64&lt;br&gt;&#xd;
+- Issue GVI-1595, Review 15021&lt;br&gt;&#xd;
+-- Merged all SVN commit commands into one to reduce overhead.&lt;br&gt;&#xd;
+-- Added command to tag each build in SVN.&lt;br&gt;&#xd;
+Sprint 63&lt;br&gt;&#xd;
+- Issue GVI-1175, Review 14974&lt;br&gt;&#xd;
+-- Enable SafeTLib functionality.&lt;br&gt;&#xd;
+Sprint 61&lt;br&gt;&#xd;
+- Issue GVI-1175, Review 14873&lt;br&gt;&#xd;
+-- Added support for the SafeTLib.&lt;br&gt;&#xd;
+- Issue GVI-1175, Review 14922&lt;br&gt;&#xd;
+-- Removed support for SafeTLib. Using 10906AI_QM_safeAL_Library.&lt;br&gt;&#xd;
+Sprint 58&lt;br&gt;&#xd;
+- Case 85757, Review 14774:&lt;br&gt;&#xd;
+-- Updated script to publish EDS file in artifacts.&lt;br&gt;&#xd;
+Sprint 52&lt;br&gt;&#xd;
+- Case 84774, Review 14552:&lt;br&gt;&#xd;
+-- Added lint and test (TDD) folder to excluded region.&lt;br&gt;&#xd;
+Sprint 50&lt;br&gt;&#xd;
+- Case 84073, Review 14434:&lt;br&gt;&#xd;
+-- Disabled C3PO build.&lt;br&gt;&#xd;
+Sprint 50&lt;br&gt;&#xd;
+- Case 82439, Review 14405:&lt;br&gt;&#xd;
+-- Removed GVx build.&lt;br&gt;&#xd;
+Sprint 48&lt;br&gt;&#xd;
+- Review by Michael Fetherston:&lt;br&gt;&#xd;
+-- Adjusted to allow for unstable build of 10906A7 to trigger this job, and for the latest successful build of 10906A7 to be used.&lt;br&gt;&#xd;
+Sprint 43&lt;br&gt;&#xd;
+- Review 14086:&lt;br&gt;&#xd;
+-- Reduced warnings allowed to a max of 0 high priority, 0 normal priority, 0 low priority warnings.&lt;br&gt;&#xd;
+Sprint 42&lt;br&gt;&#xd;
+- Case 82099, Review 14112:&lt;br&gt;&#xd;
+-- Started building GVI125.&lt;br&gt;&#xd;
+-- Updated warnings allowed to a max of 0 high priority, 2 normal priority, 0 low priority warnings.&lt;br&gt;&#xd;
+Sprint 41&lt;br&gt;&#xd;
+- Case 78672, Review 14053:&lt;br&gt;&#xd;
+-- Stopped building HVHP and GVx075.&lt;br&gt;&#xd;
+-- Stopped lint and TDD for this job.&lt;br&gt;&#xd;
+-- Changed tasking compiler warning pattern from SKAI to GVI250.&lt;br&gt;&#xd;
+-- Updated SLOC to look at all of the source folder.&#xd;
+Sprint 40&lt;br&gt;&#xd;
+- Case 81084: Updated warnings allowed to a max of 122 high priority, 453 normal priority, 3149 low priority warnings.&lt;br&gt;&#xd;
+Sprint 39&lt;br&gt;&#xd;
+- Case 80868, Review 13970:&lt;br&gt;&#xd;
+-- Added build of GVI075 to the job.&lt;br&gt; &#xd;
+- Case 80847: Updated warnings allowed to a max of 122 high priority, 465 normal priority, 3157 low priority warnings.&lt;br&gt;&#xd;
+Sprint 36&lt;br&gt;&#xd;
+- Case 80043: Updated warnings allowed to a max of 122 high priority, 466 normal priority, 3157(+1) low priority warnings. &lt;br&gt;&#xd;
+Sprint 35&lt;br&gt;&#xd;
+- Case 79391, Review 13838: Modified permissions to copy artifact to all jobs.&lt;br&gt;&#xd;
+- Case 79676: Updated warnings allowed to a max of 122 high priority, 466 normal priority, 3156 low priority warnings.&lt;br&gt;&#xd;
+Sprint 34&lt;br&gt;&#xd;
+- Case 79374, Review 13761&lt;br&gt;&#xd;
+-- Added builds of GVI250 and GVx075 to the job.&lt;br&gt;&#xd;
+-- Removed human friendly lint output pass. (2nd Lint Pass.) &lt;br&gt;&#xd;
+Sprint 32&lt;br&gt;&#xd;
+- Case 78477, Review 13665: &lt;br&gt;&#xd;
+-- Changed &quot;Max # of builds to keep&quot; from 20 to 100 to keep intermediate builds for at least a full sprint.&lt;br&gt;&#xd;
+-- Reduced warning threshold to 122 High priority, 474 medium priority, 3242 low priority warnings. &lt;br&gt;&#xd;
+- Case 78294, Review 13663: Changed job config to build &quot;Release&quot; versions of builds (ie w/o &quot;Debug_&quot; prefix).&lt;br&gt;&#xd;
+Sprint 29&lt;br&gt;&#xd;
+- Case 76691, Review 13554: Updated to copy version files from relating projects.&lt;br&gt;&#xd;
+Sprint 26&lt;br&gt;&#xd;
+- Case 75798&#xd;
+-- Updated warnings allowed to a max of 122 high priority, 485 normal priority and 3325 low priority warnings. -CB&lt;br&gt;&#xd;
+Sprint 23&lt;br&gt;&#xd;
+- Case 75798, Review 12340:&lt;br&gt;&#xd;
+-- Allow a max of 327 high priority, 584 normal priority and 3626 low priority warnings.&lt;br&gt;&#xd;
+-- Adjusted warning threshold to set build to unstable instead of fail.&lt;br&gt;  &#xd;
+Sprint 22&lt;br&gt;&#xd;
+- Case 75515, Review 12264: Integration of changes from MTC introduces new instances of existing lint warnings. Limits increased to accomodate.&lt;br&gt;&#xd;
+- Case 75443, Review 12287: Allow a max of 445 high priority, 639 normal priority and 4093 low priority warnings.&lt;br&gt;&#xd;
+Sprint 21&lt;br&gt;&#xd;
+- Case 75162, Review 12237: Allow a max of 125 high priority, 562 normal priority and 3470 low priority warnings.&lt;br&gt;&#xd;
+Sprint 19&lt;br&gt;&#xd;
+- Case 74811, Review 12166: Always use SVN HEAD revision. Allow a max of 132 high priority, 569 normal priority and 3574 low priority warnings.&lt;br&gt;&#xd;
+- Case 74571, Review 12171: Added support for building GVx250B variant application.&lt;br&gt;&#xd;
+Sprint 17&lt;br&gt;&#xd;
+- Case 74242, Review 12098: Adjusted lint errors threshold to 132, 575, 3658 (high, normal, low priority).&lt;br&gt;&#xd;
+Sprint 16&lt;br&gt;&#xd;
+- Case 69974, Review 12061:&lt;br&gt;&#xd;
+-- Added storing the doxygen configuration file in SVN with the version update.&lt;br&gt;&#xd;
+-- Added timestamp to console output.&lt;br&gt;Sprint 15&lt;br&gt;&#xd;
+- Case 73513, Review 11998: Publish the object dictionary.&lt;br&gt;&#xd;
+Sprint 13&lt;br&gt;&#xd;
+- Case 72947, Review 11924: Remove building of SKAI &amp; EPUMP. Now lint and TDD are both being run for HVHP. Also, adjusted lint errors threshold to 2440, 646, 4057 (high, normal, low priority).&lt;br&gt;&#xd;
+Sprint 10&lt;br&gt;&#xd;
+- Case 72172, Review 11818: Adjusted lint errors threshold to 2440, 639, 4063 (high, normal, low priority).&lt;br&gt;&#xd;
+Sprint 9&lt;br&gt;&#xd;
+- Case 71835, Review 11801: Look at build.bat return codes and fail the Jenkins job if one of them fail.&lt;br&gt;&#xd;
+Sprint 8&lt;br&gt;&#xd;
+- Case 70628, Review 11750: Added 10906A7 Platform library. Also, adjusted lint errors threshold to 2440, 648, 4063 (high, normal, low priority).&lt;br&gt;&#xd;
+Sprint 7&lt;br&gt;&#xd;
+- Case 70369, Review 11729: Added support for GVx250 TDD tests. Also, bring api_io.h in from 10716A0.&lt;br&gt;&#xd;
+- Case 70365, Review 11738: Link in CANOpen (10906A5) and SysParamDB (10906A6) libraries. Also, lowered lint errors threshold from 2900 to 2489, 602, 4350 (high, normal, low priority).&lt;br&gt;&#xd;
+- Reviewed by Michael K: Updated TDD Coverage Metric Targets to match the 10906X0.&lt;br&gt;&#xd;
+- Case 70349, Reviewed by Tamkin: Do not block build when downstream projects are building.&lt;br&gt;&#xd;
+Sprint 6&lt;br&gt;&#xd;
+- Case 70007, Review 11690: Link in SafeRTOS library (10906A2). Also, fixed issue with calling add_build_and_date.py.&lt;br&gt;&#xd;
+- Case 69999, Review 11694: Copy artifacts for the external sources folder (10906A0, 10906A1 &amp; PHC1 projects).&lt;br&gt;&#xd;
+- Case 70010, Review 11704: Build other Tasking projects: C3P0, HV_PARKER and EPUMP.&lt;br&gt;&#xd;
+- Case 70018, Review 11707: Link in iLLD library (10906A4).&lt;br&gt;&#xd;
+Sprint 5&lt;br&gt;&#xd;
+- Case 69750: Add build information to version.h file. Publish lint and version.h files into appropriate folders.&lt;br&gt;&#xd;
+Sprint 4&lt;br&gt;&#xd;
+- Case 69013: Updated SLOC calculation so that an erroneous file doesn&apos;t get published.&lt;br&gt;&#xd;
+Sprint 3&lt;br&gt;&#xd;
+- Case 67930: Adjusted configure to poll SVN so it can build when SVN updates are made.&lt;br&gt;&#xd;
+Sprint 2&lt;br&gt;&#xd;
+- Case 68942: Setup to build, lint, and sloc project.&lt;br&gt;&#xd;
+- Case 69013: Setup to provide statistics to support SW dashboard reporting.&lt;br&gt;&#xd;
+&#xd;
+</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>80</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <hudson.plugins.copyartifact.CopyArtifactPermissionProperty plugin="copyartifact@1.46.1">
+      <projectNameList>
+        <string>*</string>
+      </projectNameList>
+    </hudson.plugins.copyartifact.CopyArtifactPermissionProperty>
+    <EnvInjectJobProperty plugin="envinject@2.3.0">
+      <info>
+        <propertiesContent>LINT_FILES_PATTERN=code\\lint\\lint_jenkins*.txt
+TASKING_FILES_PATTERN=statistics_other\\GVI250\\*build_log.txt
+GCC_FILES_PATTERN=code\\test\\CppUTest\\build_log.txt</propertiesContent>
+        <secureGroovyScript plugin="script-security@1.78">
+          <script></script>
+          <sandbox>true</sandbox>
+        </secureGroovyScript>
+        <loadFilesFromMaster>false</loadFilesFromMaster>
+      </info>
+      <on>true</on>
+      <keepJenkinsSystemVariables>true</keepJenkinsSystemVariables>
+      <keepBuildVariables>true</keepBuildVariables>
+      <overrideBuildParameters>false</overrideBuildParameters>
+      <contributors/>
+    </EnvInjectJobProperty>
+  </properties>
+  <scm class="hudson.scm.SubversionSCM" plugin="subversion@2.14.4">
+    <locations>
+      <hudson.scm.SubversionSCM_-ModuleLocation>
+        <remote>http://ecd026a18.us.parker.corp/svn/ecdwpg/1090000/1090600/1090601/trunk@HEAD</remote>
+        <credentialsId>VisualSVN</credentialsId>
+        <local>.</local>
+        <depthOption>infinity</depthOption>
+        <ignoreExternalsOption>false</ignoreExternalsOption>
+        <cancelProcessOnExternalsFail>true</cancelProcessOnExternalsFail>
+      </hudson.scm.SubversionSCM_-ModuleLocation>
+    </locations>
+    <excludedRegions>.*/code/root/Indy/externalSources/.*
+.*/code/root/Indy/libraries/.*
+.*/Documents/doxygen/.*
+.*/code/lint/.*
+./code/test/.*</excludedRegions>
+    <includedRegions></includedRegions>
+    <excludedUsers></excludedUsers>
+    <excludedRevprop></excludedRevprop>
+    <excludedCommitMessages></excludedCommitMessages>
+    <workspaceUpdater class="hudson.scm.subversion.CheckoutUpdater"/>
+    <ignoreDirPropChanges>false</ignoreDirPropChanges>
+    <filterChangelog>false</filterChangelog>
+    <quietOperation>false</quietOperation>
+  </scm>
+  <quietPeriod>360</quietPeriod>
+  <assignedNode>windows</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <jenkins.triggers.ReverseBuildTrigger>
+      <spec></spec>
+      <upstreamProjects>10906A7_PlatformLibrary</upstreamProjects>
+      <threshold>
+        <name>UNSTABLE</name>
+        <ordinal>1</ordinal>
+        <color>YELLOW</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </jenkins.triggers.ReverseBuildTrigger>
+    <hudson.triggers.SCMTrigger>
+      <spec>@midnight</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>:: Delete the library folders (to make room for the ones from Jenkins).&#xd;
+del /F /Q /S &quot;code\root\Indy\libraries\10906A2_SafeRTOS\*.*&quot;&#xd;
+rmdir /S /Q &quot;code\root\Indy\libraries\10906A2_SafeRTOS&quot;&#xd;
+del /F /Q /S &quot;code\root\Indy\libraries\10906A4_iLLD_TC27D\*.*&quot;&#xd;
+rmdir /S /Q &quot;code\root\Indy\libraries\10906A4_iLLD_TC27D&quot;&#xd;
+del /F /Q /S &quot;code\root\Indy\libraries\10906A5_CANOpen\*.*&quot;&#xd;
+rmdir /S /Q &quot;code\root\Indy\libraries\10906A5_CANOpen&quot;&#xd;
+del /F /Q /S &quot;code\root\Indy\libraries\10906A6_SysParamDB\*.*&quot;&#xd;
+rmdir /S /Q &quot;code\root\Indy\libraries\10906A6_SysParamDB&quot;&#xd;
+del /F /Q /S &quot;code\root\Indy\libraries\10906A7_PlatformLibrary\*.*&quot;&#xd;
+rmdir /S /Q &quot;code\root\Indy\libraries\10906A7_PlatformLibrary&quot;&#xd;
+del /F /Q /S &quot;code\root\Indy\libraries\10906AD_SafeTlib_Library\*.*&quot;&#xd;
+rmdir /S /Q &quot;code\root\Indy\libraries\10906AD_SafeTlib_Library&quot;&#xd;
+del /F /Q /S &quot;code\root\Indy\libraries\10906AH_FuSa_safeAL_Library\*.*&quot;&#xd;
+rmdir /S /Q &quot;code\root\Indy\libraries\10906AH_FuSa_safeAL_Library&quot;&#xd;
+&#xd;
+:: Delete the external sources (to make room for the ones from Jenkins) files (includes all subfolders).&#xd;
+del /F /Q /S &quot;code\root\Indy\externalSources\*.*&quot;&#xd;
+&#xd;
+:: Remove some SVN documents from the publish folder.&#xd;
+del /F /Q /S &quot;code\publish\*.*&quot;</command>
+      <configuredLocalRules/>
+    </hudson.tasks.BatchFile>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.46.1">
+      <project>10906A2_SafeRTOS</project>
+      <filter>publish/**/*.*</filter>
+      <target>code/root/Indy/libraries</target>
+      <excludes></excludes>
+      <selector class="hudson.plugins.copyartifact.TriggeredBuildSelector">
+        <fallbackToLastSuccessful>true</fallbackToLastSuccessful>
+        <upstreamFilterStrategy>UseGlobalSetting</upstreamFilterStrategy>
+        <allowUpstreamDependencies>false</allowUpstreamDependencies>
+      </selector>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.BatchFile>
+      <command>:: Rename the folder (it comes in as code\root\Indy\libraries\publish).&#xd;
+cd code\root\Indy\libraries&#xd;
+:: Copy the version history file to the externalSources folder.&#xd;
+copy publish\config\10906A2_SafeRTOS_version.h ..\externalSources\10906A2_SafeRTOS_version.h&#xd;
+&#xd;
+rename publish 10906A2_SafeRTOS</command>
+      <configuredLocalRules/>
+    </hudson.tasks.BatchFile>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.46.1">
+      <project>10906A4_iLLD_TC27D</project>
+      <filter>publish/**/*.*</filter>
+      <target>code/root/Indy/libraries</target>
+      <excludes></excludes>
+      <selector class="hudson.plugins.copyartifact.TriggeredBuildSelector">
+        <fallbackToLastSuccessful>true</fallbackToLastSuccessful>
+        <upstreamFilterStrategy>UseGlobalSetting</upstreamFilterStrategy>
+        <allowUpstreamDependencies>false</allowUpstreamDependencies>
+      </selector>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.BatchFile>
+      <command>:: Rename the folder (it comes in as code\root\Indy\libraries\publish).&#xd;
+cd code\root\Indy\libraries\&#xd;
+:: Copy the version history file to the externalSources folder.&#xd;
+copy publish\ifx\Configuration\10906A4_iLLD_version.h ..\externalSources\10906A4_iLLD_version.h&#xd;
+&#xd;
+rename publish 10906A4_iLLD_TC27D</command>
+      <configuredLocalRules/>
+    </hudson.tasks.BatchFile>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.46.1">
+      <project>10906A5_CANOpen</project>
+      <filter>publish/**/*.*</filter>
+      <target>code/root/Indy/libraries</target>
+      <excludes></excludes>
+      <selector class="hudson.plugins.copyartifact.TriggeredBuildSelector">
+        <fallbackToLastSuccessful>true</fallbackToLastSuccessful>
+        <upstreamFilterStrategy>UseGlobalSetting</upstreamFilterStrategy>
+        <allowUpstreamDependencies>false</allowUpstreamDependencies>
+      </selector>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.BatchFile>
+      <command>:: Rename the folder (it comes in as code\root\Indy\libraries\publish).&#xd;
+cd code\root\Indy\libraries&#xd;
+:: Copy the version history file to the externalSources folder.&#xd;
+copy publish\include\10906A5_CANOpen_version.h ..\externalSources\10906A5_CANOpen_version.h&#xd;
+&#xd;
+rename publish 10906A5_CANOpen</command>
+      <configuredLocalRules/>
+    </hudson.tasks.BatchFile>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.46.1">
+      <project>10906A6_SysParamDB</project>
+      <filter>publish/**/*.*</filter>
+      <target>code/root/Indy/libraries</target>
+      <excludes></excludes>
+      <selector class="hudson.plugins.copyartifact.TriggeredBuildSelector">
+        <fallbackToLastSuccessful>true</fallbackToLastSuccessful>
+        <upstreamFilterStrategy>UseGlobalSetting</upstreamFilterStrategy>
+        <allowUpstreamDependencies>false</allowUpstreamDependencies>
+      </selector>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.BatchFile>
+      <command>:: Rename the folder (it comes in as code\root\Indy\libraries\publish).&#xd;
+cd code\root\Indy\libraries&#xd;
+:: Copy the version history file to the externalSources folder.&#xd;
+copy publish\sys_param_db\10906A6_SysParamDB_version.h ..\externalSources\10906A6_SysParamDB_version.h&#xd;
+&#xd;
+rename publish 10906A6_SysParamDB</command>
+      <configuredLocalRules/>
+    </hudson.tasks.BatchFile>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.46.1">
+      <project>10906A7_PlatformLibrary</project>
+      <filter>publish/**/*.*</filter>
+      <target>code/root/Indy/libraries</target>
+      <excludes></excludes>
+      <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.BatchFile>
+      <command>:: Rename the folder (it comes in as code\root\Indy\libraries\publish).&#xd;
+cd code\root\Indy\libraries&#xd;
+:: Copy the version history files to the externalSources folder.&#xd;
+copy publish\source\10906A7_platformVersion.h ..\externalSources\10906A7_platformVersion.h&#xd;
+copy publish\source\externalSources\afw_tagSerializer_version.h ..\externalSources\afw_tagSerializer_version.h&#xd;
+copy publish\source\externalSources\10906A8_tlf35584_version.h ..\externalSources\10906A8_tlf35584_version.h&#xd;
+copy publish\source\externalSources\common_drivers_version.h ..\externalSources\common_drivers_version.h&#xd;
+copy publish\source\externalSources\config\common_config_version.h ..\externalSources\common_config_version.h&#xd;
+&#xd;
+rename publish 10906A7_PlatformLibrary</command>
+      <configuredLocalRules/>
+    </hudson.tasks.BatchFile>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.46.1">
+      <project>10906AD_SafeTlib</project>
+      <filter>publish/**/*.*</filter>
+      <target>code/root/Indy/libraries</target>
+      <excludes></excludes>
+      <selector class="hudson.plugins.copyartifact.SavedBuildSelector"/>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.BatchFile>
+      <command>:: Rename the folder (it comes in as code\root\Indy\libraries\publish).&#xd;
+cd code\root\Indy\libraries&#xd;
+:: Copy the version history files to the externalSources folder.&#xd;
+copy publish\includes\SafeTlib_version.h ..\externalSources\SafeTlib_version.h&#xd;
+&#xd;
+rename publish 10906AD_SafeTlib_Library</command>
+      <configuredLocalRules/>
+    </hudson.tasks.BatchFile>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.46.1">
+      <project>10906AH_FuSa_safeAL_Library</project>
+      <filter>publish/**/*.*</filter>
+      <target>code/root/Indy/libraries</target>
+      <excludes></excludes>
+      <selector class="hudson.plugins.copyartifact.TriggeredBuildSelector">
+        <fallbackToLastSuccessful>true</fallbackToLastSuccessful>
+        <upstreamFilterStrategy>UseGlobalSetting</upstreamFilterStrategy>
+        <allowUpstreamDependencies>false</allowUpstreamDependencies>
+      </selector>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.BatchFile>
+      <command>:: Rename the folder (it comes in as code\root\Indy\libraries\publish).&#xd;
+cd code\root\Indy\libraries&#xd;
+:: Copy the version history files to the externalSources folder.&#xd;
+copy publish\include\fusaSafeAlLibrary_version.h ..\externalSources\fusaSafeAlLibrary_version.h&#xd;
+&#xd;
+rename publish 10906AH_FuSa_safeAL_Library</command>
+      <configuredLocalRules/>
+    </hudson.tasks.BatchFile>
+    <hudson.tasks.BatchFile>
+      <command>mkdir code\publish&#xd;
+mkdir publish&#xd;
+::mkdir publish\C3PO&#xd;
+mkdir publish\GVI250&#xd;
+mkdir publish\GVI075&#xd;
+mkdir publish\GVI125&#xd;
+mkdir svn_modified&#xd;
+:: Have the standard Dashboard statistics folder filled with HVHP artifacts. &#xd;
+mkdir statistics&#xd;
+:: Have another statistics folder filled with non-HVHP artifacts. Only for compiler logs for now. Add lint once these projects are linted.&#xd;
+mkdir statistics_other&#xd;
+::mkdir statistics_other\C3PO&#xd;
+mkdir statistics_other\GVI250&#xd;
+mkdir statistics_other\GVI075&#xd;
+mkdir statistics_other\GVI125&#xd;
+&#xd;
+set errorcode=0&#xd;
+&#xd;
+:: Work in the code\Jenkins folder&#xd;
+cd code\Jenkins&#xd;
+&#xd;
+:: Build GVI075 and move artifacts to /publish/GVI075/&#xd;
+call build.bat GVI075 1095602 GVI075&#xd;
+set errorcode=%ERRORLEVEL%&#xd;
+if not &quot;%errorcode%&quot;==&quot;0&quot; goto Done&#xd;
+move /Y ..\publish\* ..\..\publish\GVI075\&#xd;
+copy /Y *build_log.txt ..\..\statistics_other\GVI075\&#xd;
+del /F /Q *build_log.txt&#xd;
+&#xd;
+:: Build GVI125 and move artifacts to /publish/GVI075/&#xd;
+call build.bat GVI125 1104601 GVI125&#xd;
+set errorcode=%ERRORLEVEL%&#xd;
+if not &quot;%errorcode%&quot;==&quot;0&quot; goto Done&#xd;
+move /Y ..\publish\* ..\..\publish\GVI125\&#xd;
+copy /Y *build_log.txt ..\..\statistics_other\GVI125\&#xd;
+del /F /Q *build_log.txt&#xd;
+&#xd;
+:: Build GVI250 and move artifacts to /publish/GVI250/&#xd;
+call build.bat GVI250 1091604 GVI250&#xd;
+set errorcode=%ERRORLEVEL%&#xd;
+if not &quot;%errorcode%&quot;==&quot;0&quot; goto Done&#xd;
+move /Y ..\publish\* ..\..\publish\GVI250\&#xd;
+copy /Y *build_log.txt ..\..\statistics_other\GVI250\&#xd;
+del /F /Q *build_log.txt&#xd;
+&#xd;
+:: Build C3PO and move artifacts to /publish/C3PO/&#xd;
+::call build.bat C3PO 1092601 C3PO&#xd;
+::set errorcode=%ERRORLEVEL%&#xd;
+::if not &quot;%errorcode%&quot;==&quot;0&quot; goto Done&#xd;
+::move /Y ..\publish\* ..\..\publish\C3PO\&#xd;
+::copy /Y *build_log.txt ..\..\statistics_other\C3PO\&#xd;
+::del /F /Q *build_log.txt&#xd;
+&#xd;
+:Done&#xd;
+exit /B %errorcode%&#xd;
+</command>
+      <configuredLocalRules/>
+    </hudson.tasks.BatchFile>
+    <hudson.tasks.BatchFile>
+      <command>:: Add build number and date to version.h&#xd;
+py -3 code\Jenkins\add_build_and_date.py code\root\Indy\version.h %BUILD_NUMBER%&#xd;
+copy &quot;code\root\Indy\version.h&quot; &quot;svn_modified\&quot;&#xd;
+&#xd;
+:: copy &quot;%LINT_FILES_PATTERN%&quot; &quot;statistics\&quot;&#xd;
+copy &quot;%TASKING_FILES_PATTERN%&quot; &quot;statistics\&quot;&#xd;
+&#xd;
+:: Copy the object dictionary to the publish folder.&#xd;
+copy &quot;code\root\Indy\libraries\10906A6_SysParamDB\10906A6_*.epf&quot; &quot;publish&quot;&#xd;
+&#xd;
+:: Copy the EDS file to the publish folder.&#xd;
+copy &quot;code\root\Indy\libraries\10906A5_CANOpen\10906A5_CANOpen_*.eds&quot; &quot;publish&quot;&#xd;
+&#xd;
+:: TODO&#xd;
+:: Rename version info so it doesn&apos;t get overwritten&#xd;
+::move Documents\doxygen\html\group__version__info.html Documents\doxygen\html\group__version__info__old.html</command>
+      <configuredLocalRules/>
+    </hudson.tasks.BatchFile>
+    <hudson.tasks.BatchFile>
+      <command>:: Run a check on file patterns used for the Warnings plugin. There is a known issue where the Warnings plugin&#xd;
+:: will not fail the build if no files are found, so we check it ourselves.&#xd;
+set localerr=0&#xd;
+&#xd;
+if not exist &quot;%TASKING_FILES_PATTERN%&quot; set localerr=1&#xd;
+&#xd;
+if %localerr% neq 0 echo Failed to find files to parse for Warnings!&#xd;
+exit /B %localerr%</command>
+      <configuredLocalRules/>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers>
+    <hudson.plugins.warnings.WarningsPublisher plugin="warnings@5.0.1">
+      <healthy>0</healthy>
+      <unHealthy>1</unHealthy>
+      <thresholdLimit>normal</thresholdLimit>
+      <pluginName>[WARNINGS] </pluginName>
+      <defaultEncoding></defaultEncoding>
+      <canRunOnFailed>false</canRunOnFailed>
+      <usePreviousBuildAsReference>false</usePreviousBuildAsReference>
+      <useStableBuildAsReference>false</useStableBuildAsReference>
+      <useDeltaValues>false</useDeltaValues>
+      <thresholds plugin="analysis-core@1.96">
+        <unstableTotalAll></unstableTotalAll>
+        <unstableTotalHigh>0</unstableTotalHigh>
+        <unstableTotalNormal>0</unstableTotalNormal>
+        <unstableTotalLow>0</unstableTotalLow>
+        <unstableNewAll></unstableNewAll>
+        <unstableNewHigh></unstableNewHigh>
+        <unstableNewNormal></unstableNewNormal>
+        <unstableNewLow></unstableNewLow>
+        <failedTotalAll></failedTotalAll>
+        <failedTotalHigh></failedTotalHigh>
+        <failedTotalNormal></failedTotalNormal>
+        <failedTotalLow></failedTotalLow>
+        <failedNewAll></failedNewAll>
+        <failedNewHigh></failedNewHigh>
+        <failedNewNormal></failedNewNormal>
+        <failedNewLow></failedNewLow>
+      </thresholds>
+      <shouldDetectModules>false</shouldDetectModules>
+      <dontComputeNew>true</dontComputeNew>
+      <doNotResolveRelativePaths>true</doNotResolveRelativePaths>
+      <includePattern></includePattern>
+      <excludePattern></excludePattern>
+      <messagesPattern></messagesPattern>
+      <categoriesPattern></categoriesPattern>
+      <parserConfigurations>
+        <hudson.plugins.warnings.ParserConfiguration>
+          <pattern>statistics_other/GVI250/1091604_build_log.txt</pattern>
+          <parserName>TASKING VX Compiler</parserName>
+        </hudson.plugins.warnings.ParserConfiguration>
+      </parserConfigurations>
+      <consoleParsers/>
+    </hudson.plugins.warnings.WarningsPublisher>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>publish/**/*.*, statistics/**/*.*, svn_modified/**/*.*, statistics_other/**/*.*</artifacts>
+      <allowEmptyArchive>false</allowEmptyArchive>
+      <onlyIfSuccessful>false</onlyIfSuccessful>
+      <fingerprint>false</fingerprint>
+      <defaultExcludes>true</defaultExcludes>
+      <caseSensitive>true</caseSensitive>
+      <followSymlinks>true</followSymlinks>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.Mailer plugin="mailer@1.34">
+      <recipients>jonathon.church@parker.com michael.kuusela@parker.com prabha.gunda@parker.com</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>true</sendToIndividuals>
+    </hudson.tasks.Mailer>
+    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@2.11.0">
+      <config>
+        <scriptFiles/>
+        <groovyScripts/>
+        <buildSteps>
+          <org.jenkinsci.plugins.postbuildscript.model.PostBuildStep>
+            <results>
+              <string>SUCCESS</string>
+              <string>UNSTABLE</string>
+            </results>
+            <role>BOTH</role>
+            <executeOn>BOTH</executeOn>
+            <buildSteps>
+              <hudson.tasks.BatchFile>
+                <command>:: Commit changes&#xd;
+svn commit -m &quot;Jenkins post-build commit 1090601 build %BUILD_NUMBER%&quot; &quot;%WORKSPACE%\code\root\Indy\externalSources&quot; &quot;%WORKSPACE%\code\root\Indy\libraries&quot; &quot;%WORKSPACE%\Documents\doxygen&quot;&#xd;
+if %ERRORLEVEL% NEQ 0 exit 1 &#xd;
+&#xd;
+:: Tag build&#xd;
+cd code\Jenkins&#xd;
+call tag_build.bat 1090601 ../root/Indy/version.h &quot;&quot; http://ecd026a18.us.parker.corp/svn/ecdwpg/1090000/1090600/1090601 %BUILD_NUMBER%&#xd;
+if %ERRORLEVEL% NEQ 0 exit 1 </command>
+                <configuredLocalRules/>
+              </hudson.tasks.BatchFile>
+            </buildSteps>
+            <stopOnFailure>false</stopOnFailure>
+          </org.jenkinsci.plugins.postbuildscript.model.PostBuildStep>
+          <org.jenkinsci.plugins.postbuildscript.model.PostBuildStep>
+            <results>
+              <string>SUCCESS</string>
+              <string>FAILURE</string>
+              <string>UNSTABLE</string>
+            </results>
+            <role>BOTH</role>
+            <executeOn>BOTH</executeOn>
+            <buildSteps>
+              <hudson.tasks.BatchFile>
+                <command>:: Determine the sloc&#xd;
+cloc --by-file -xml --out=cloc.xml &quot;code\root\Indy\source\*.*&quot;</command>
+                <configuredLocalRules/>
+              </hudson.tasks.BatchFile>
+            </buildSteps>
+            <stopOnFailure>false</stopOnFailure>
+          </org.jenkinsci.plugins.postbuildscript.model.PostBuildStep>
+        </buildSteps>
+        <markBuildUnstable>false</markBuildUnstable>
+      </config>
+    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
+    <hudson.plugins.sloccount.SloccountPublisher plugin="sloccount@1.25">
+      <pattern>cloc.xml</pattern>
+      <encoding></encoding>
+      <commentIsCode>false</commentIsCode>
+      <numBuildsInGraph>0</numBuildsInGraph>
+      <ignoreBuildFailure>true</ignoreBuildFailure>
+    </hudson.plugins.sloccount.SloccountPublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.39">
+      <deleteDirs>false</deleteDirs>
+      <cleanupParameter></cleanupParameter>
+      <externalDelete></externalDelete>
+      <disableDeferredWipeout>false</disableDeferredWipeout>
+    </hudson.plugins.ws__cleanup.PreBuildCleanup>
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.20">
+      <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
+        <timeoutMinutes>60</timeoutMinutes>
+      </strategy>
+      <operationList>
+        <hudson.plugins.build__timeout.operations.AbortOperation/>
+        <hudson.plugins.build__timeout.operations.FailOperation/>
+      </operationList>
+    </hudson.plugins.build__timeout.BuildTimeoutWrapper>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.13"/>
+  </buildWrappers>
+</project>

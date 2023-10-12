@@ -1,0 +1,213 @@
+//****************************************************************************************************************************************************
+// COPYRIGHT NOTICE
+//
+// Copyright (c) 2018-2023 by Parker-Hannifin Corporation.
+// All rights reserved.
+//
+// No part of this work may be reproduced, published, or distributed in any form or by any means (electronically, mechanically, photocopying,
+// recording or otherwise), or stored in a database or retrieval system, without the prior written permission of Parker-Hannifin Corporation in each
+// instance.
+//
+// Repository:
+//   - SVN: 983639
+//
+// Description:
+//   This file is specific to the Tasking VX TriCore compiler. This should never be modified, unless it is to add support for this compiler.
+//
+//   This file is passed into PC Lint so PC Lint is able to process source files for the compiler. It is called as follows:
+//      lint co-tricore.lnt source-files(s)
+//
+//   End users should not modify this file.
+//
+// History:
+//   2018-Jan-16 by Jonathon Church - Case 44377, Review (see comment)
+//   - Created.
+//   - Reviewed by Michael Fetherston prior to checkin.
+//   2018-Jan-22 by Jonathon Church - Case 45542, Review (see comment)
+//   - Corrected the the size of an integer to 4 bytes.
+//   - Added a definition of __dsync().
+//   - Disabled the 932 - 934 errors in PC Lint. These are warnings generated specifically for Windows targets. We were getting the warning for 934
+//     and when we reviewed the PC Lint documentation, realized the 932 and 933 can be removed too.
+//   - Reviewed by Michael Coyne and Michael Fetherston during quick meeting.
+//   2018-Feb-14 by Jonathon Church - Case 46203, Reviewed (see comment)
+//   - Adjusted warnings to allow error 9026 to be suppressed for select macros using -esym.
+//   - Minor change reviewed by Michael Fetherston.
+//   2018-Feb-26 by Tamkin Rahman - Case 46457, Review 7435
+//   - Added "-width(0)" line so that the each warning is on 1 line.
+//   2018-Feb-26 by Jonathon Church - Case 46296, Review 7438
+//   - Notified Lint that the library include path is a library directory to remove several library related warnings.
+//   - Suppressed warning 451 for stdint.h, stdio.h, and string.h.
+//   2018-Mar-12 by Jonathon Church - Case 46810, Review 7486
+//   - Case 46725/46775: Adjusted our logic on suppressing the "Lint 9xxx Note" messages to be broader so we don't have to keep editing this file.
+//   - Case 46726: Disabled the info 835 message when zero is used as the left or right side of an operator.
+//   - Case 46764: Disabled the info 793 message about identifiers larger than 31 characters after confirming it wasn't an issue for this compiler.
+//     Some of the iLLD and Codesys libraries use longer identifiers.
+//   2018-Apr-25 by Michael Coyne - Case 47749, Review 7606
+//   - Case 47046: Disable the info 845 message about ORing in 0 values.
+//   2018-Nov-20 by Allan Scheirer - Case 52366, Review 8950
+//   - Added TriCore specific data type for __syscallfunc to work with 10716A1 syscall functions.
+//   2018-Nov-21 by Michael Kuusela - Review 8950
+//   - Changed the repository for this file from 1065602 to 983639 to allow it to be single sourced for all projects using Tasking TriCore compiler.
+//   2018-Dec-19 by Michael Coyne - Case 52766, Review 8990
+//   - Incorporate as many items as possible from lint_defines.h. Correct a couple of definitions to bring them in line with lint_defines.h.
+//   2019-Jan-15 by Michael Fetherston - Case 52797, Review 9015
+//   - Added some interrupt defines.
+//   2019-Mar-26 by Jonathon Church - Case 54658, Review 9133
+//   - Added definition of the Tasking intrinsic function __enable().
+//   2019-Jul-31 by Tamkin Rahman - Case 54523, Review 9346
+//   - Move definition of __enable() to lint_defines.h (so that it can be mocked).
+//   2021-Jan-28 by Jonathon Church & Tamkin Rahman - Case 67538, Review 11436
+//   - Allow __asm() to take a variable number of arguments.
+//   2021-Apr-23 by Tamkin Rahman - Case 68937, Review 11635
+//   - Added a definition for __isync().
+//   2021-Aug-27 by Tamkin Rahman - Case 70330, Review 11902
+//   - Added a definition for the Tasking linker action __section__().
+//   2023-Jun-12 by Nicolaj Jensen on behalf of Mahendra Patel - Jira Issue GVI-966, Review 14834
+//   - Deprecated strtod, strtof, wcstod and wcstof functions to mark them as obsolete (scanf is deprecated by default in au-misra3.lnt).
+//   2023-Aug-09 by Nicolaj Jensen - Issue GVI-1577, Review 14998
+//   - Changes done to de-lint data_flash.c and nvol_serialise_api.c.
+//****************************************************************************************************************************************************
+// Set the warning level within library headers to 1(no warnings, just syntax errors).  Comment out if you are actually linting library headers.  This
+// option makes obsolete options of the form -elib(axxx) where xxx >= 400 which may be retained for historical reasons.
+-wlib(1)
+
+// Setup Lint to match our compiler. See case 44377 for data captured showing how we arrived at these values.
+-fcu        // plain character is signed
+-sc1        // sizeof(char) is 1
+-ss2        // sizeof(short) is 2
+-si4        // sizeof(int) is 4
+-sl4        // sizeof(long) is 4
+-sf4        // sizeof(float) is 4
+-sd4        // sizeof(double) is 4
+-sld4       // sizeof(long double)  is 4
+
+-elib(46)   // Suppress "field type should be _Bool, unsigned int or signed int." for libraries.
+
+// Section 1.1 - Data types : http://www.tasking.com/support/tricore/tc_user_guide_v4.0.pdf#clang_datatypes
+// Used to satisfy TriCore specific data types. These data types aren't correct (as in work the way they do in Tasking), but will allow Lint to
+// analyze our code.
++d"__bit=unsigned char"
++d"__fract=float"
++d"__sfract=short"
++d"__laccum=double"
++d"__packb=int"
++d"__packhw=int"
++d"__align(x)="
++d"__syscallfunc(x)="
+
+-d"__nop()="
+
+// Section 1.2 -  Accessing Memory : http://www.tasking.com/support/tricore/tc_user_guide_v4.0.pdf#clang_memaccess
++d"__at(absolute_address)="
++d"__atbit(address_name,offset)="
+
+// Section 1.3 - Data Type Qualifiers : http://www.tasking.com/support/tricore/tc_user_guide_v4.0.pdf#clang_typequal
++rw(__circ)
++rw(__sat)
++rw(__mcsram)
++rw(__pram)
++rw(__share_pcp)
+
+// Used to satisfy other tricore library issues.
++d"fract=float"
++rw(__sfrbit16)
++rw(__sfrbit32)
+
+// Used to satisfy stdlib.h.
++rw(__malloc__)
++rw(__noreturn__)
+
+// Used to satisfy stdio.h.
++d"__format__(a, b, c)="
+
++d"__dsync()="
++d"__isync()="
+
+// These definitions are taken from the top of stdint.h and must be defined so stdint.h creates the types within stdint.h.
++d"__CHAR_BIT__=8"
++d"__SHORT_BIT__=16"
++d"__INT_BIT__=32"
++d"__LONG_BIT__=32"
++d"__LLONG_BIT__=64"
++d"__INTPTR_BIT__=32"
++d"__PTRDIFF_BIT__=32"
++d"__SIZE_BIT__=32"
++d"__WCHAR_BIT__=16"
+
+// Compiler selection.
++d"__TASKING__="
++d"__CTC__="
+
++d"__wchar_t=unsigned char"
++d"__ptrdiff_t=unsigned long"
++d"__size_t=long"
+
++d"__attribute__( a )="
++d"__format__( ... )="
++d"__section__( ... )="
++d"__debug()="
++d"__trap(a)="
++d"__noreturn__="
++d"__jump__="
++d"__asm(...)="
++d"__interrupt(a)="
++d"__vector_table(a)="
+
++fem  // Allow types after the modifier.
+
++libclass(angle)  // The default for lint is (angle, foreign). We want to remove foreign so it will check our header files.
++v    // Don't change options but output to stderr and stdout. Do this before using -message.
+
+-i"%LibIncPath%" /* Path to the compiler library includes. */
++libdir(%LibIncPath%)
+
+// Remove the "Warning 451: Header file 'x' repeatedly included but does not have a standard include guard [MISRA 2012 Directive 4.10, required]"
+// warning for the following Tasking library files.
+-efile(451, stdint.h, stdio.h, string.h )
+
+//****************************************************************************************************************************************************
+//  MISRA Configuration
+//****************************************************************************************************************************************************
+".\au-misra3.lnt"   // Do not modify this line.
+
+// MISRA specific rules we disable for library files.
+-elib(???)
+-elib(????)
+
+// Errors 932, 933, and 934 are warnings PC Lint creates for common Windows warnings. Since we are not compiling for Windows, none of them apply to us.
+// So far we have only encountered 934, but since we noticed 932 and 933 were related, disabling them makes the most sense.
+-e932
+-e933
+-e934       // "taking address of near auto variable 'x' (Context)" is a Lint warning specifically to track issues with DLLs in Windows. We are not
+            // using DLLs so this error doesn't apply to us.
+
+// We have troubles suppressing warnings of the form "Note 9xxx: .." message. The intuitive option is to use -emacro to disable these warnings, but
+// that does not work. "http://www.gimpel.com/Discussion.cfm?ThreadMode=Next&ThreadID=4645" supports our finding with -emacro and suggests using
+// -estring(9026...), using a specific number, and then using a -esym(9026, macro) for each macro that we have an issue with. Testing has shown that
+// we can use a (9???) wild card for the numeric warning for -estring (it doesn't seem to care about the string) and then use -esym for each warning
+// we wish to disable. This saves us from having a large list of -estring(9???) warnings to disable. Note that using 9* as the wild card it
+// suppressed the three digit 900 warnings. Using 9??? limits the adjustment to the 9000 warnings, which still seem to show up.
+-estring(9???, *)
+
+//****************************************************************************************************************************************************
+//  Miscellaneous
+//****************************************************************************************************************************************************
+-width(0) // don't insert line breaks (unlimited output width).
+
+-e793
+// Disable the "Info 793: ANSI/ISO limit of 31 'significant characters in an external identifier', 'xxx', exceeded -- processing is unaffected"
+// message as a test done in case 46764 shows this isn't an issue and some of the 3S and iLLD library routines exceed 31 characters.
+
+-e835
+// Suppress the "Info 835: A zero has been given as right argument to operator 'operation'" messages as we do use 0 as an argument to the various
+// operations.
+
+-e845
+// Suppress the "Info 845: The right argument to operator '|' is certain to be 0. In some cases, a zero serves to make it clear to the reader that
+// certain bits or values are disabled or turned off.
+
+//**** Tasking Errata - TCVX-44651 indicate potential issues with these functions. Parker recommends they are not used without special care. *********
+-deprecate(function,strtod,[Tasking Errata - TCVX-44651, Parker recommends this function not to be used])
+-deprecate(function,strtof,[Tasking Errata - TCVX-44651, Parker recommends this function not to be used])
+-deprecate(function,wcstod,[Tasking Errata - TCVX-44651, Parker recommends this function not to be used])
+-deprecate(function,wcstof,[Tasking Errata - TCVX-44651, Parker recommends this function not to be used])
